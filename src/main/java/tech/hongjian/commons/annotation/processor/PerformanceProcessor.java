@@ -52,7 +52,7 @@ public class PerformanceProcessor {
 	}
 
 	private String generateLogContent(String methodName, Duration uesd, TimeUnit unit) {
-		return "[" + methodName + "] runed " + getDurationValue(uesd, unit) + "(" + unit.name() + ").";
+		return "Performance-[" + methodName + "] runed " + getDurationValue(uesd, unit) + "(" + unit.name() + ").";
 	}
 
 	private TimeUnit getTimeUnit(Performance performance) {
