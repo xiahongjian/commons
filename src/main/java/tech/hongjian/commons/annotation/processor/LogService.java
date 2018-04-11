@@ -1,6 +1,6 @@
-package tech.hongjian.common.annotation.processor;
+package tech.hongjian.commons.annotation.processor;
 
-import tech.hongjian.common.model.WebLogInfo;
+import tech.hongjian.commons.model.WebLogInfo;
 
 /**
  * @author xiahongjian 

@@ -1,4 +1,4 @@
-package tech.hongjian.common.annotation;
+package tech.hongjian.commons.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

@@ -1,4 +1,4 @@
-package tech.hongjian.common.util;
+package tech.hongjian.commons.util;
 
 import java.util.HashSet;
 import java.util.Set;

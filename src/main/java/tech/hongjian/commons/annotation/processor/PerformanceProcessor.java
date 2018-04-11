@@ -1,4 +1,4 @@
-package tech.hongjian.common.annotation.processor;
+package tech.hongjian.commons.annotation.processor;
 
 import java.time.Duration;
 import java.time.LocalTime;
@@ -13,7 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.event.Level;
 
-import tech.hongjian.common.annotation.Performance;
+import tech.hongjian.commons.annotation.Performance;
 
 /**
  * @author xiahongjian

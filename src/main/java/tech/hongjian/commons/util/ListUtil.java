@@ -1,4 +1,4 @@
-package tech.hongjian.common.util;
+package tech.hongjian.commons.util;
 
 import java.util.ArrayList;
 import java.util.List;

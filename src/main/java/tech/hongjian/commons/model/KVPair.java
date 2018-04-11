@@ -1,4 +1,4 @@
-package tech.hongjian.common.model;
+package tech.hongjian.commons.model;
 
 /**
  * @author xiahongjian 

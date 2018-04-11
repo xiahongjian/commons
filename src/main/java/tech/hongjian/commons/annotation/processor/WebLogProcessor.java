@@ -1,4 +1,4 @@
-package tech.hongjian.common.annotation.processor;
+package tech.hongjian.commons.annotation.processor;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,9 +11,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import tech.hongjian.common.annotation.WebLog;
-import tech.hongjian.common.model.WebLogInfo;
-import tech.hongjian.common.util.WebUtil;
+import tech.hongjian.commons.annotation.WebLog;
+import tech.hongjian.commons.model.WebLogInfo;
+import tech.hongjian.commons.util.WebUtil;
 
 /**
  * @author xiahongjian 

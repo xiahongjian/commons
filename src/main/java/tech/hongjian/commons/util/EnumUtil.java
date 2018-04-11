@@ -1,4 +1,4 @@
-package tech.hongjian.common.util;
+package tech.hongjian.commons.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import tech.hongjian.common.model.KVPair;
+import tech.hongjian.commons.model.KVPair;
 
 /**
  * @author xiahongjian 

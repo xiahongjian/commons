@@ -1,4 +1,4 @@
-package tech.hongjian.common.util;
+package tech.hongjian.commons.util;
 
 import javax.servlet.http.HttpServletRequest;
 
