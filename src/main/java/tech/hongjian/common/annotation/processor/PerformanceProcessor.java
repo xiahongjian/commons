@@ -38,10 +38,10 @@ public class PerformanceProcessor {
 		// 未开启performance注解，直接返回方法结果
 		if (!isOpen)
 			return joinPoint.proceed();
-		LocalTime befor = LocalTime.now();
+		LocalTime before = LocalTime.now();
 		Object result = joinPoint.proceed();
 		LocalTime after = LocalTime.now();
-		Duration used = Duration.between(befor, after);
+		Duration used = Duration.between(before, after);
 		logTimeUsed(performance.level(), generateLogContent(methodFullName(joinPoint), used, getTimeUnit(performance)));
 		return result;
 	}

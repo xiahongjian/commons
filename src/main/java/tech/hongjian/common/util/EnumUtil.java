@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import tech.hongjian.common.model.KVPair;
+
 /**
  * @author xiahongjian 
  * @time   2018-04-11 15:20:28
