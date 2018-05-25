@@ -13,7 +13,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import tech.hongjian.commons.annotation.WebLog;
 import tech.hongjian.commons.model.WebLogInfo;
-import tech.hongjian.commons.util.WebUtil;
+import tech.hongjian.commons.web.WebUtil;
 
 /**
  * @author xiahongjian 
@@ -41,7 +41,7 @@ public class WebLogProcessor {
 		info.setUrl(request.getRequestURL().toString());
 		info.setPath(request.getRequestURI());
 		info.setRequestMethod(request.getMethod());
-		info.setClientIp(WebUtil.getRealIp(request));
+		info.setClientIp(WebUtil.getClientRealIp(request));
 		info.setClazz(signature.getDeclaringTypeName());
 		info.setMethod(signature.getName());
 		logService.log(info);
