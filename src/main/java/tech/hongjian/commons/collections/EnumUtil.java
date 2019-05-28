@@ -12,6 +12,8 @@ import java.util.stream.Stream;
 import tech.hongjian.commons.model.KVPair;
 
 /**
+ * 枚举工具类
+ * 
  * @author xiahongjian 
  * @time   2018-04-11 15:20:28
  *
@@ -63,7 +65,7 @@ public class EnumUtil {
         E[] constants = enumType.getEnumConstants();
         List<KVPair> list = new ArrayList<>(constants.length);
         for (E c : constants) {
-            list.add(new KVPair(c.name(), ((HasCaption) c).getCaption()));
+            list.add(new KVPair(c.name(), c instanceof HasCaption ? ((HasCaption) c).getCaption() : c.name()));
         }
         return list;
     }
@@ -79,7 +81,7 @@ public class EnumUtil {
         E[] constants = enumType.getEnumConstants();
         Map<String, String> map = new HashMap<>(constants.length);
         for (E c : constants) {
-            map.put(c.name(), ((HasCaption) c).getCaption());
+            map.put(c.name(), c instanceof HasCaption ? ((HasCaption) c).getCaption() : c.name());
         }
         return map;
     }
