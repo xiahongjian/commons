@@ -22,4 +22,9 @@ public @interface Interceptor {
 	 * 拦截器拦截路径 
 	 */
 	String[] path();
+	
+	/**
+	 * 用于排序
+	 */
+	int order();
 }

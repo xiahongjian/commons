@@ -15,12 +15,16 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<junit.version>4.12</junit.version>
-		<spring.version>4.3.14.RELEASE</spring.version>
+		<spring.version>5.0.5.RELEASE</spring.version>
 		<slf4j.version>1.7.25</slf4j.version>
 		<aspectj.version>1.8.13</aspectj.version>
 		<servlet.version>3.1.0</servlet.version>
 		<jackson.version>2.9.9</jackson.version>
 		<fastjson.version>1.2.47</fastjson.version>
+        <lombok.version>1.16.20</lombok.version>
+        <commons-lang3.version>3.5</commons-lang3.version>
+        <druid.version>1.1.10</druid.version>
+        <freemarker.version>2.3.28</freemarker.version>
 	</properties>
 
 
@@ -52,6 +56,13 @@
 			<version>${spring.version}</version>
 			<scope>provided</scope>
 		</dependency>
+        
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+            <scope>provided</scope>
+        </dependency>
 
 		<dependency>
 			<groupId>org.aspectj</groupId>
@@ -78,7 +89,6 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>${jackson.version}</version>
-			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -86,6 +96,33 @@
 			<artifactId>fastjson</artifactId>
 			<version>${fastjson.version}</version>
 		</dependency>
+        
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <optional>true</optional>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>${druid.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        
+         <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>${freemarker.version}</version>
+            <scope>provided</scope>
+        </dependency>
 
 	</dependencies>
 </project>
