@@ -25,6 +25,7 @@
         <commons-lang3.version>3.5</commons-lang3.version>
         <druid.version>1.1.10</druid.version>
         <freemarker.version>2.3.28</freemarker.version>
+		<httpclient-version>4.5.6</httpclient-version>
 	</properties>
 
 
@@ -123,6 +124,13 @@
             <version>${freemarker.version}</version>
             <scope>provided</scope>
         </dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>${httpclient-version}</version>
+		</dependency>
+
 
 	</dependencies>
 </project>
