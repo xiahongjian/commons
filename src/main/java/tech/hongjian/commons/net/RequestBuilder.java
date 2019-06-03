@@ -16,6 +16,17 @@ import java.net.URI;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Example:
+ * RestRequest req = new RequestBuilder("http://example.com")
+ *  .param("name1", "value1")
+ *  .param("name2", "value2")
+ *  .header("certain-header", "value")
+ *  .auth("username", "password")
+ *  .build();
+ * String getRes = req.get();
+ * String postRes = req.post();
+ */
 @Slf4j
 @NoArgsConstructor
 public class RequestBuilder {
@@ -148,7 +159,14 @@ public class RequestBuilder {
             if (url != null) {
                 this.url = url;
             }
-            HttpPost post = new HttpPost(url);
+            HttpPost post;
+            if (!params.isEmpty()) {
+                URI uri =
+                        new URIBuilder(url).addParameters(params.entrySet().stream().flatMap(e -> e.getValue().stream().map(v -> new BasicNameValuePair(e.getKey(), v))).collect(Collectors.toList())).build();
+                post = new HttpPost(uri);
+            } else {
+                post = new HttpPost(url);
+            }
             post.setEntity(new StringEntity(body, charset));
             post.setConfig(HttpClientUtil.buildRequestConfig(timeout));
             return HttpClientUtil.doRequest(post, charset);
