@@ -3,10 +3,7 @@ package tech.hongjian.commons.net;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.*;
 import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpPut;
+import org.apache.http.client.methods.*;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.config.*;
@@ -157,17 +154,14 @@ public class HttpClientUtil {
         get.setConfig(buildRequestConfig(timeout == 0 ? connectTimeouts : timeout));
         log.info("Begin to execute GET request，url: {}, param(s): {}", url,
                 JSONUtil.toJSON(params));
-
-        try (CloseableHttpResponse response = httpClient.execute(get)) {
-            String res = handleResponse(response, encode);
+        try {
+            String res = doRequest(get, encode);
             log.info("Finish executing GET request, url: {}, param(s): {}, response: " +
                     "{}", url, params, res);
             return res;
         } catch (Exception e) {
             log.error("Failed to execute GET request, url: {}", url, e);
             throw e;
-        } finally {
-            get.releaseConnection();
         }
     }
 
@@ -215,17 +209,26 @@ public class HttpClientUtil {
         }
         log.info("Begin to execute POST request, url: {}, param(s): {}", url,
                 postData);
-        try (CloseableHttpResponse response = httpClient.execute(post)) {
-            String str = handleResponse(response, encoding);
+        try {
+            String str = doRequest(post, encoding);
             log.info("Finish executing POST request, url: {}, response: {}",
                     url, str);
             return str;
-        } catch (Exception e) {
+        } catch (IOException e) {
             log.error("Failed to execute POST request, url: {}, param(s): {}", url,
                     postData, e);
             throw e;
+        }
+    }
+
+    public static String doRequest(HttpRequestBase request, String encoding) throws IOException {
+        try (CloseableHttpResponse response = httpClient.execute(request)) {
+            String str = handleResponse(response, encoding);
+            return str;
+        } catch (IOException e) {
+            throw e;
         } finally {
-            post.releaseConnection();
+            request.releaseConnection();
         }
     }
 
@@ -284,17 +287,15 @@ public class HttpClientUtil {
             put.setEntity(new StringEntity(data, encoding));
         }
         log.info("Begin to execute PUT request, url: {}, param(s): {}", url, data);
-        try (CloseableHttpResponse response = httpClient.execute(put)) {
-            String res = handleResponse(response, encoding);
+        try {
+            String res = doRequest(put, encoding);
             log.info("Finish executing PUT request, url: {}, param(s): {}, response: " +
                     "{}", url, data, res);
             return res;
-        } catch (Exception e) {
+        } catch (IOException e) {
             log.error("Failed to execute PUT request, url: {}, param(s): {}", url, data
                     , e);
             throw e;
-        } finally {
-            put.releaseConnection();
         }
     }
 
