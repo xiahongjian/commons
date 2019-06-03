@@ -328,7 +328,7 @@ public class HttpClientUtil {
         }
     }
 
-    private static RequestConfig buildRequestConfig(int timeout) {
+    public static RequestConfig buildRequestConfig(int timeout) {
         return RequestConfig.custom().setSocketTimeout(timeout).setConnectTimeout(timeout)
                 .setConnectionRequestTimeout(timeout).setExpectContinueEnabled(false).build();
     }
