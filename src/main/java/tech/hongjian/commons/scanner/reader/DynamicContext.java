@@ -21,7 +21,7 @@ import java.util.stream.Stream;
 @Slf4j
 public final class DynamicContext {
 	private static final ClassReader CLASSPATH_READER = new ClassPathClassReader();
-	private static final ClassReader JAR_READER = new JarClassReaser();
+	private static final ClassReader JAR_READER = new JarClassReader();
 	private static final String JAR_SUFFIX = ".jar";
 
 	private static boolean isJarContext = false;

@@ -23,14 +23,14 @@ public class AbstractClassReader implements ClassReader {
 
     @Override
     public Set<ClassInfo> readClasses(Scanner scanner) {
-        return filteClass(scanner.getPackageName(), scanner.getParents(),
+        return filterClass(scanner.getPackageName(), scanner.getParents(),
 				scanner.getAnnotations(),
                 scanner.isRecursive());
     }
 
-    public Set<ClassInfo> filteClass(String packageName, Set<Class<?>> parents,
-                                     Set<Class<? extends Annotation>> annotaions,
-									 boolean recursive) {
+    public Set<ClassInfo> filterClass(String packageName, Set<Class<?>> parents,
+                                      Set<Class<? extends Annotation>> annotations,
+                                      boolean recursive) {
         final Set<ClassInfo> classInfos = new HashSet<>();
         String packageDir = packageName.replace(".", "/");
 
@@ -40,13 +40,13 @@ public class AbstractClassReader implements ClassReader {
             while (urls.hasMoreElements()) {
                 URL url = urls.nextElement();
                 String filePath = new URI(url.getFile()).getPath();
-                findClassByPackage(packageName, filePath, parents, annotaions,
+                findClassByPackage(packageName, filePath, parents, annotations,
 						recursive, classInfos);
             }
         } catch (IOException | URISyntaxException e) {
             log.error(e.getMessage(), e);
         } catch (ClassNotFoundException e) {
-            log.error("No such classs.", e);
+            log.error("No such class.", e);
         }
 
         return classInfos;
@@ -75,7 +75,7 @@ public class AbstractClassReader implements ClassReader {
 
             String className = f.getName().substring(0, f.getName().length() - 6);
             Class<?> clazz = Class.forName(packageName + "." + className);
-            determains(clazz, parents, annotations, classInfos);
+            determaines(clazz, parents, annotations, classInfos);
         }
 
         return classInfos;
@@ -103,7 +103,7 @@ public class AbstractClassReader implements ClassReader {
         return annotations.stream().anyMatch(a -> clazz.getAnnotation(a) != null);
     }
 
-    protected void determains(Class<?> clazz, Set<Class<?>> parents, Set<Class<? extends Annotation>> annotations, Set<ClassInfo> classes) {
+    protected void determaines(Class<?> clazz, Set<Class<?>> parents, Set<Class<? extends Annotation>> annotations, Set<ClassInfo> classes) {
         if (parents == null && annotations == null) {
             classes.add(ClassInfo.of(clazz));
             return;
