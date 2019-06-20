@@ -49,7 +49,7 @@ public class NumberUtil {
             throw new IllegalArgumentException("The number must be a positive number.");
         }
 
-        Stack<TranslateResult> groups = new Stack<>();
+        Stack<Quadruple> groups = new Stack<>();
         for (int i = 0; n > 0; n /= 10000, i++) {
             int low4 = (int) (n % 10000);
             groups.push(handle4bit(low4, mode));
@@ -58,7 +58,7 @@ public class NumberUtil {
         int size = groups.size();
         // 当只有一组时，n<10000，直接返回这组的字符串形式即可
         if (size == 1) {
-            return groups.pop().str;
+            return groups.pop().name;
         }
 
         String s = "";
@@ -66,18 +66,18 @@ public class NumberUtil {
         boolean hasZero = false;
         while (!groups.empty()) {
             index++;
-            TranslateResult result = groups.pop();
+            Quadruple result = groups.pop();
             // 当这组值为0时，hasZero设置为true
-            if (result.count == 0) {
+            if (result.length == 0) {
                 hasZero = true;
                 continue;
             }
 
-            if (hasZero || result.count < 4 && index != 1) {
+            if (hasZero || result.length < 4 && index != 1) {
                 s += CHINESE_NUMS[mode][0];
                 hasZero = false;
             }
-            s += result.str + GROUP_UNITS[mode][size - index];
+            s += result.name + GROUP_UNITS[mode][size - index];
         }
         // 此时返回零
         if ("".equals(s)) {
@@ -87,7 +87,7 @@ public class NumberUtil {
         return s;
     }
 
-    private static TranslateResult handle4bit(int n, int mode) {
+    private static Quadruple handle4bit(int n, int mode) {
 
         Stack<Integer> bits = new Stack<>();
         for (int i = 0; n > 0; n /= 10, i++) {
@@ -123,16 +123,16 @@ public class NumberUtil {
         if (size == 0) {
             s = CHINESE_NUMS[mode][0];
         }
-        return new TranslateResult(s, size);
+        return new Quadruple(s, size);
     }
 
 
-    static class TranslateResult {
-        String str;
-        int count;
-        public TranslateResult(String s, int count) {
-            this.str = s;
-            this.count = count;
+    static class Quadruple {
+        String name;
+        int length;
+        public Quadruple(String name, int length) {
+            this.name = name;
+            this.length = length;
         }
     }
 }
