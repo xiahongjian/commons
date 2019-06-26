@@ -50,7 +50,7 @@ public class NumberUtil {
         }
 
         Stack<Quadruple> groups = new Stack<>();
-        for (int i = 0; n > 0; n /= 10000, i++) {
+        for (; n > 0; n /= 10000) {
             int low4 = (int) (n % 10000);
             groups.push(handle4bit(low4, mode));
         }
@@ -90,7 +90,7 @@ public class NumberUtil {
     private static Quadruple handle4bit(int n, int mode) {
 
         Stack<Integer> bits = new Stack<>();
-        for (int i = 0; n > 0; n /= 10, i++) {
+        for (; n > 0; n /= 10) {
             bits.push(n % 10);
         }
         boolean hasHigh = false;

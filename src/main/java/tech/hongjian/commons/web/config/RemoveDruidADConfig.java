@@ -32,7 +32,7 @@ import com.alibaba.druid.util.Utils;
 public class RemoveDruidADConfig {
 
     @Bean
-    public FilterRegistrationBean removeDruidADFilterRegistrationBean(DruidStatProperties properties) {
+    public FilterRegistrationBean<Filter> removeDruidADFilterRegistrationBean(DruidStatProperties properties) {
         // 获取web监控页面的参数
         DruidStatProperties.StatViewServlet config = properties.getStatViewServlet();
         // 提取common.js的配置路径
@@ -64,7 +64,7 @@ public class RemoveDruidADConfig {
             public void destroy() {
             }
         };
-        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+        FilterRegistrationBean<Filter> registrationBean = new FilterRegistrationBean<Filter>();
         registrationBean.setFilter(filter);
         registrationBean.addUrlPatterns(commonJsPattern);
         return registrationBean;

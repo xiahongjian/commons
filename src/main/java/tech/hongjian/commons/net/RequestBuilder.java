@@ -1,8 +1,13 @@
 package tech.hongjian.commons.net;
 
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.extern.slf4j.Slf4j;
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import org.apache.http.Header;
 import org.apache.http.HttpHeaders;
 import org.apache.http.client.methods.HttpGet;
@@ -12,9 +17,8 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 
-import java.net.URI;
-import java.util.*;
-import java.util.stream.Collectors;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 /**
  * Example:
@@ -27,7 +31,6 @@ import java.util.stream.Collectors;
  * String getRes = req.get();
  * String postRes = req.post();
  */
-@Slf4j
 @NoArgsConstructor
 public class RequestBuilder {
     private String charset = "UTF-8";
@@ -131,7 +134,7 @@ public class RequestBuilder {
     }
 
 
-    private static class RestRequest {
+    public static class RestRequest {
         String charset;
         String url;
         List<Header> headers;
@@ -144,7 +147,7 @@ public class RequestBuilder {
                 this.url = url;
             }
             URI uri =
-                    new URIBuilder(url).addParameters(params.entrySet().stream().flatMap(e -> e.getValue().stream().map(v -> new BasicNameValuePair(e.getKey(), v))).collect(Collectors.toList())).build();
+                    new URIBuilder(HttpClientUtil.setProtocol(this.url)).addParameters(params.entrySet().stream().flatMap(e -> e.getValue().stream().map(v -> new BasicNameValuePair(e.getKey(), v))).collect(Collectors.toList())).build();
             HttpGet get = new HttpGet(uri);
             get.setHeaders(headers.toArray(new Header[headers.size()]));
             get.setConfig(HttpClientUtil.buildRequestConfig(timeout));
@@ -162,14 +165,18 @@ public class RequestBuilder {
             HttpPost post;
             if (!params.isEmpty()) {
                 URI uri =
-                        new URIBuilder(url).addParameters(params.entrySet().stream().flatMap(e -> e.getValue().stream().map(v -> new BasicNameValuePair(e.getKey(), v))).collect(Collectors.toList())).build();
+                        new URIBuilder(HttpClientUtil.setProtocol(this.url)).addParameters(params.entrySet().stream().flatMap(e -> e.getValue().stream().map(v -> new BasicNameValuePair(e.getKey(), v))).collect(Collectors.toList())).build();
                 post = new HttpPost(uri);
             } else {
-                post = new HttpPost(url);
+                post = new HttpPost(this.url);
             }
             post.setEntity(new StringEntity(body, charset));
             post.setConfig(HttpClientUtil.buildRequestConfig(timeout));
             return HttpClientUtil.doRequest(post, charset);
+        }
+        
+        public String post() throws Exception {
+            return post(null);
         }
     }
 
