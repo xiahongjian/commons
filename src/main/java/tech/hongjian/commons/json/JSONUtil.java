@@ -41,6 +41,15 @@ public class JSONUtil {
 		return "";
 	}
 	
+	public static <T> String toJSON(T obj, String dateFormat) {
+	    try {
+            return DEFAULT_MAPPER.writer(new SimpleDateFormat(dateFormat)).writeValueAsString(obj);
+        } catch (JsonProcessingException e) {
+            LOGGER.warn("Failed to serilize object to JSON.", e);
+        }
+        return "";
+	}
+	
 	public static <T> T toBean(String json, Class<T> clazz) {
 		try {
 			return DEFAULT_MAPPER.readValue(json, clazz);
@@ -49,6 +58,15 @@ public class JSONUtil {
 		}
 		return null;
 	}
+	
+	public static <T> T toBean(String json, Class<T> clazz, String dateFormat) {
+        try {
+            return new ObjectMapper().setDateFormat(new SimpleDateFormat(dateFormat)).readValue(json, clazz);
+        } catch (IOException e) {
+            LOGGER.warn("Failed to parse JSON to object, JSON: {}", json, e);
+        }
+        return null;
+    }
 	
 	public static <T> List<T> toList(String json, Class<T> clazz) {
 		JavaType type = DEFAULT_MAPPER.getTypeFactory().constructParametricType(List.class, clazz);
@@ -60,6 +78,17 @@ public class JSONUtil {
 		return null;
 	}
 	
+	public static <T> List<T> toList(String json, Class<T> clazz, String dateFormat) {
+	    ObjectMapper mapper = new ObjectMapper().setDateFormat(new SimpleDateFormat(dateFormat));
+        JavaType type = mapper.getTypeFactory().constructParametricType(List.class, clazz);
+        try {
+            return mapper.readValue(json, type);
+        } catch (IOException e) {
+            LOGGER.warn("Failed to parse JSON to List object, JSON: {}", json, e);
+        }
+        return null;
+    }
+	
 	
 	public static <T> Map<String, T> toMap(String json, Class<T> clazz) {
 		JavaType type = DEFAULT_MAPPER.getTypeFactory().constructMapLikeType(HashMap.class, String.class, clazz);
@@ -70,4 +99,15 @@ public class JSONUtil {
 		}
 		return null;
 	}
+	
+	public static <T> Map<String, T> toMap(String json, Class<T> clazz, String dateFormat) {
+	    ObjectMapper mapper = new ObjectMapper().setDateFormat(new SimpleDateFormat(dateFormat));
+        JavaType type = mapper.getTypeFactory().constructMapLikeType(HashMap.class, String.class, clazz);
+        try {
+            return mapper.readValue(json, type);
+        } catch (IOException e) {
+            LOGGER.warn("Failed to parse JSON to Map object, JSON: {}", json, e);
+        }
+        return null;
+    }
 }
