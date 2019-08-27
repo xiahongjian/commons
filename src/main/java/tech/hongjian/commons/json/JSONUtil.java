@@ -2,8 +2,6 @@ package tech.hongjian.commons.json;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,57 +69,5 @@ public class JSONUtil {
 			LOGGER.warn("Failed to parse JSON to Map object, JSON: {}", json, e);
 		}
 		return null;
-	}
-	
-	public static void main(String[] args) {
-		Map<String, String> map = new HashMap<>();
-		map.put("1", "a");
-		map.put("2", "b");
-		
-		String json = toJSON(map);
-		System.out.println(json);
-		
-		Map<String, String> m = toMap(json, String.class);
-		m.forEach((key, value) -> {
-			System.out.println("key: " + key + ", value: " + value);
-		});
-		
-		User user = new User("tom", new Date());
-		String userJson = toJSON(user);
-		System.out.println(userJson);
-		
-		User u = toBean(userJson, User.class);
-		System.out.println(u.getName());
-		
-		List<User> users = Arrays.asList(new User("a", new Date()), new User("2", new Date()));
-		String usersJson = toJSON(users);
-		System.out.println(userJson);
-		List<User> list = toList(usersJson, User.class);
-		list.forEach(e -> {
-			System.out.println(e.getName());
-		});
-	}
-	
-	public static class User {
-		private String name;
-		private Date date;
-		
-		public User() {}
-		public User(String name, Date date) {
-			this.name = name;
-			this.date = date;
-		}
-		public String getName() {
-			return name;
-		}
-		public void setName(String name) {
-			this.name = name;
-		}
-		public Date getDate() {
-			return date;
-		}
-		public void setDate(Date date) {
-			this.date = date;
-		}
 	}
 }
