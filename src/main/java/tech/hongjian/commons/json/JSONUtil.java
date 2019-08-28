@@ -29,14 +29,13 @@ public class JSONUtil {
 		DEFAULT_MAPPER.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
 	}
 	
-	
 	private JSONUtil() {}
 	
 	public static <T> String toJSON(T obj) {
 		try {
 			return DEFAULT_MAPPER.writeValueAsString(obj);
 		} catch (JsonProcessingException e) {
-			LOGGER.warn("Failed to serilize object to JSON.", e);
+			LOGGER.warn("Failed to serilize the object to JSON.", e);
 		}
 		return "";
 	}
@@ -45,7 +44,7 @@ public class JSONUtil {
 	    try {
             return DEFAULT_MAPPER.writer(new SimpleDateFormat(dateFormat)).writeValueAsString(obj);
         } catch (JsonProcessingException e) {
-            LOGGER.warn("Failed to serilize object to JSON.", e);
+            LOGGER.warn("Failed to serilize the object to JSON.", e);
         }
         return "";
 	}
@@ -54,7 +53,7 @@ public class JSONUtil {
 		try {
 			return DEFAULT_MAPPER.readValue(json, clazz);
 		} catch (IOException e) {
-			LOGGER.warn("Failed to parse JSON to object, JSON: {}", json, e);
+			LOGGER.warn("Failed to parse the JSON string to an object, JSON: {}", json, e);
 		}
 		return null;
 	}
@@ -63,7 +62,7 @@ public class JSONUtil {
         try {
             return new ObjectMapper().setDateFormat(new SimpleDateFormat(dateFormat)).readValue(json, clazz);
         } catch (IOException e) {
-            LOGGER.warn("Failed to parse JSON to object, JSON: {}", json, e);
+            LOGGER.warn("Failed to parse the JSON string to an object, JSON: {}", json, e);
         }
         return null;
     }
@@ -73,7 +72,7 @@ public class JSONUtil {
 		try {
 			return DEFAULT_MAPPER.readValue(json, type);
 		} catch (IOException e) {
-			LOGGER.warn("Failed to parse JSON to List object, JSON: {}", json, e);
+			LOGGER.warn("Failed to parse the JSON string to a List object, JSON: {}", json, e);
 		}
 		return null;
 	}
@@ -84,7 +83,7 @@ public class JSONUtil {
         try {
             return mapper.readValue(json, type);
         } catch (IOException e) {
-            LOGGER.warn("Failed to parse JSON to List object, JSON: {}", json, e);
+            LOGGER.warn("Failed to parse the JSON string to a List object, JSON: {}", json, e);
         }
         return null;
     }
@@ -95,7 +94,7 @@ public class JSONUtil {
 		try {
 			return DEFAULT_MAPPER.readValue(json, type);
 		} catch (IOException e) {
-			LOGGER.warn("Failed to parse JSON to Map object, JSON: {}", json, e);
+			LOGGER.warn("Failed to parse the JSON string to a Map object, JSON: {}", json, e);
 		}
 		return null;
 	}
@@ -106,7 +105,7 @@ public class JSONUtil {
         try {
             return mapper.readValue(json, type);
         } catch (IOException e) {
-            LOGGER.warn("Failed to parse JSON to Map object, JSON: {}", json, e);
+            LOGGER.warn("Failed to parse the JSON string to a Map object, JSON: {}", json, e);
         }
         return null;
     }
