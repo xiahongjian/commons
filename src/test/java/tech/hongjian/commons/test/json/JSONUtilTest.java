@@ -118,4 +118,10 @@ public class JSONUtilTest {
             return true;
         }
     }
+    
+    public static void main(String[] args) {
+        String sourceUsersJson = "{\"name\":\"tom\",\"date\":\"2019-08-27\"}";
+        User user = JSONUtil.toBean(sourceUsersJson, User.class);
+        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getDate()));
+    }
 }
