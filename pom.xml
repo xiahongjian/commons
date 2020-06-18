@@ -20,7 +20,7 @@
         <slf4j.version>1.7.25</slf4j.version>
         <aspectj.version>1.8.13</aspectj.version>
         <servlet.version>3.1.0</servlet.version>
-        <jackson.version>2.9.9.2</jackson.version>
+        <jackson.version>2.10.0.pr1</jackson.version>
         <jackson.datatype.jsr310.version>2.10.2</jackson.datatype.jsr310.version>
         <fastjson.version>1.2.47</fastjson.version>
         <lombok.version>1.16.20</lombok.version>
