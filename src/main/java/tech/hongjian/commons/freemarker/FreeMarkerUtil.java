@@ -28,7 +28,7 @@ public class FreeMarkerUtil {
 
     /**
      * 根据提供的模板字符串和数据模型渲染模板
-     * 
+     *
      * @param name 模板名称，用于缓存{@link Template}对象，如果不需要缓存则传入null
      * @param source 模板字符串
      * @param model 数据模型
@@ -43,9 +43,6 @@ public class FreeMarkerUtil {
             TEMPATES.get(name).process(model, out);
             return out;
         }
-        if (name == null) {
-            name = genTemlateName();
-        }
         Template t = new Template(name, source, CFG);
         if (name != null) {
             TEMPATES.put(name, t);
@@ -57,9 +54,5 @@ public class FreeMarkerUtil {
     public static Writer process(String source, Map<String, Object> model)
             throws TemplateException, IOException {
         return process(null, source, model);
-    }
-
-    private static String genTemlateName() {
-        return "__template__" + System.currentTimeMillis();
     }
 }
