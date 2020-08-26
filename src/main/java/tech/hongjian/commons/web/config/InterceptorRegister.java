@@ -8,7 +8,6 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -16,12 +15,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import lombok.extern.slf4j.Slf4j;
 import tech.hongjian.commons.annotation.Interceptor;
 
-/** 
+/**
  * @author xiahongjian
  * @time   2019-05-30 20:19:13
  */
 @Slf4j
-@Configuration
 public class InterceptorRegister implements WebMvcConfigurer {
     @Autowired
     private ApplicationContext appCtx;

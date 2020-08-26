@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 import org.springframework.stereotype.Component;
 
 /**
- * @author xiahongjian 
+ * @author xiahongjian
  * @time   2018-04-11 14:45:38
  *
  */
@@ -19,12 +19,12 @@ import org.springframework.stereotype.Component;
 @Component
 public @interface Interceptor {
 	/**
-	 * 拦截器拦截路径 
+	 * 拦截器拦截路径
 	 */
-	String[] path();
-	
+	String[] path() default "/**";
+
 	/**
 	 * 用于排序
 	 */
-	int order();
+	int order() default 0;
 }
