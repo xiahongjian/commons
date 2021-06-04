@@ -28,7 +28,7 @@
         <commons-lang3.version>3.5</commons-lang3.version>
         <druid.version>1.1.10</druid.version>
         <freemarker.version>2.3.28</freemarker.version>
-        <httpclient.version>4.5.6</httpclient.version>
+        <httpclient.version>4.5.13</httpclient.version>
         <boot.version>2.3.1.RELEASE</boot.version>
     </properties>
 
